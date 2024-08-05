@@ -6,10 +6,10 @@ const handleRequest = frames(async (ctx) => {
   
   const buttons = [
     <Button action="post" target={{ pathname: "/" }}>
-      🖱️ Check me!
+      {ctx.message ? "🖱️ Check again!" : "🖱️ Check me!"}
     </Button>,
     <Button action="link" target={"https://warpcast.com/~/compose?text=Check%20your%20$MASKS%20stats%20with%20this%20new%20frame%20by%20@quentin72000%20!&embeds[]=https://another-masks-frame.vercel.app/frames"}>
-      🔗 Share
+      🔗 Share frame
     </Button>,
     <Button action="link" target="https://warpcast.com/quentin72000">
       🔔 Follow
