@@ -82,7 +82,7 @@ const handleRequest = frames(async (ctx) => {
           </div>
         </div>
 
-        {requesterUserData?.displayName?.includes("🎭") && false ? "" : <div tw="flex flex-row text-2xl items-center justify-center">
+        {requesterUserData?.displayName?.includes("🎭") ? "" : <div tw="flex flex-row text-2xl items-center justify-center">
             <span tw="text-gray-400">Tip : </span> <span tw='text-green-500 pl-2'>Wear a 🎭 in your display name for potential bonus allocation!</span>
           </div>
         }
