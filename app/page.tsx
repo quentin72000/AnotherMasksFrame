@@ -13,5 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
+  console.info("Metadata", await generateMetadata());
+  console.info("Frame metadata", await fetchMetadata(new URL("/frames", process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")));
   return <div>GM user data example.</div>;
 }
