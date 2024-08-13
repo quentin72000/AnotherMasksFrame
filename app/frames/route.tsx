@@ -59,17 +59,17 @@ const handleRequest = frames(async (ctx) => {
     title: "$Masks Stats by quentin72000",
     image: (
       <div tw={`flex flex-col bg-[${colors.backgroundColor}] w-full h-full justify-center`}>
-        <div tw={`flex flex-row justify-start bg-[${colors.secondaryColor}] p-0 items-center absolute top-0 rounded-br-xl`}>
+        <div tw={`flex flex-row justify-start bg-[${colors.secondaryColor}] p-0 ml-2 items-center rounded-2xl w-150`}>
             <div tw="flex m-2">
-                <img tw="rounded-full" src={requesterUserData?.profileImage} alt="logo" width={100} height={100} />
+                <img tw="rounded-full" src={requesterUserData?.profileImage} alt="logo" width={90} height={90} />
             </div>
-            <div tw="flex flex-col ml-3 mr-3 justify-center">
-                <div tw={`text-[${colors.textColor}] text-4xl`}>{requesterUserData?.displayName || ""}</div>
-                <div tw={`text-[${colors.textColor}] text-3xl`}>{"@" + (requesterUserData?.username || "")}</div>
+            <div tw="flex flex-col ml-3 mr-3 justify-center w-auto">
+                <div tw={`text-[${colors.textColor}] text-4xl w-auto`}>{requesterUserData?.displayName || ""}</div>
+                <div tw={`text-[${colors.textColor}] text-3xl w-auto`}>{"@" + (requesterUserData?.username || "")}</div>
             </div>
         </div>
 
-        <div tw="flex flex-row justify-around items-center pt-5">
+        <div tw="flex flex-row justify-around items-center pt-3">
 
             <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full shadow-2xl shadow-blue-800`}>
                 <div tw={`flex text-[${colors.textColor}] text-center text-5xl p-2`}>{masksUserInfo.masks.toString()}</div>
@@ -108,13 +108,13 @@ const handleRequest = frames(async (ctx) => {
           </div>
         </div>
 
-        {requesterUserData?.displayName?.includes("🎭") ? "" : (
+        {/* {requesterUserData?.displayName?.includes("🎭") ? "" : (
             <div tw="flex flex-row text-2xl items-center justify-center mt-3">
                 <span tw={`text-[${colors.accentColor}]`}>Tip : </span>
                 <span tw="text-green-500 pl-2">Wear a 🎭 in your display name for potential bonus allocation!</span>
             </div>
-        )}
-    </div>
+        )} */}
+      </div>
     ),
     buttons,
   };
