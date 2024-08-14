@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Frames Next.js Example",
+    title: "$Masks Stats by quentin72000",
     other: {
       ...(await fetchMetadata(
         new URL("/frames", process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
