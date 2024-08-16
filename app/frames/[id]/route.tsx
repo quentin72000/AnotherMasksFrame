@@ -45,7 +45,7 @@ const handler = async (
     };
     
       return {
-        title: '$Masks Stats by quentin72000',
+        title: `${requesterUserData.displayName}'s Profile - $Masks Stats by quentin72000`,
         image: await generateFrame(fid, requesterUserData, masksUser.userInfo, masksUser.userRank),
         buttons: buttons,
       }
