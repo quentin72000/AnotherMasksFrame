@@ -12,7 +12,6 @@ import { PiDeviceRotate } from "react-icons/pi";
 
 export const frames = createFrames({
   basePath: '/frames',
-  imagesRoute: null, // Disable default image worker route to mitigate 'URI Too Long" error
   baseUrl: appURL(),
   middleware: [
     farcasterHubContext({
