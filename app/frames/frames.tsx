@@ -13,6 +13,7 @@ import { PiDeviceRotate } from "react-icons/pi";
 export const frames = createFrames({
   basePath: '/frames',
   baseUrl: appURL(),
+  imagesRoute: null,
   middleware: [
     farcasterHubContext({
       ...(process.env.NODE_ENV === "production"
@@ -78,12 +79,12 @@ export async function generateFrame(fid: number, requesterUserData: any, masksUs
 
         <div tw="flex flex-row justify-around items-center pt-3">
 
-            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full shadow-2xl shadow-blue-800`}>
+            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full`}>
                 <div tw={`flex text-[${colors.textColor}] text-center text-5xl p-2`}>{masksUserInfo.masks.toString()}</div>
                 <div tw={`text-[${colors.textColor}] text-center text-4xl pt-2`}>Balance</div>
             </div>
 
-            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-85 min-h-85 rounded-full shadow-2xl shadow-blue-800`}>
+            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-85 min-h-85 rounded-full`}>
                 <div tw={`flex text-[${colors.textColor}] text-center text-5xl p-2`}>
                     <span>{masksUserInfo.remainingAllowance.toString()}</span>
                     <span tw={`text-[${colors.accentColor}]`}> / </span>
@@ -92,7 +93,7 @@ export async function generateFrame(fid: number, requesterUserData: any, masksUs
                 <div tw={`text-[${colors.textColor}] text-center text-4xl pt-2`}>Allowance</div>
             </div>
 
-            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full shadow-2xl shadow-blue-800`}>
+            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full`}>
                 <div tw={`flex flex-row text-[${colors.textColor}] text-center text-5xl p-2`}>
                     <span tw={`text-[${colors.accentColor}]`}>#</span>
                     <span>{masksUserRank.rank.toString()}</span>
