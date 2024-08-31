@@ -2,13 +2,16 @@ import { farcasterHubContext } from "frames.js/middleware";
 import { createFrames, Button } from "frames.js/next";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
-import { appURL } from "../utils";
+import { appURL } from "../utils/url";
 
 import colors from "../utils/colors";
 
 import { CiLock } from "react-icons/ci";
 import { LiaPiggyBankSolid } from "react-icons/lia";
 import { PiDeviceRotate } from "react-icons/pi";
+import BadgeBar from "../components/BadgeBar";
+import ProfileBar from "../components/ProfileBar";
+import StatsCircle from "../components/StatsCircle";
 
 export const frames = createFrames({
   basePath: '/frames',
@@ -67,53 +70,53 @@ export const frames = createFrames({
 export async function generateFrame(fid: number, requesterUserData: any, masksUserInfo: any, masksUserRank: any) {
   return (
     <div tw={`flex flex-col bg-[${colors.backgroundColor}] w-full h-full justify-center`}>
-        <div tw={`flex flex-row justify-start bg-[${colors.secondaryColor}] p-0 ml-2 items-center rounded-2xl w-150`}>
-            <div tw="flex m-2">
-                <img tw="rounded-full" src={requesterUserData?.profileImage} alt="logo" width={90} height={90} />
-            </div>
-            <div tw="flex flex-col ml-3 mr-3 justify-center w-auto">
-                <div tw={`text-[${colors.textColor}] text-4xl w-auto`}>{requesterUserData?.displayName || ""}</div>
-                <div tw={`text-[${colors.textColor}] text-3xl w-auto`}>{"@" + (requesterUserData?.username || "")}</div>
-            </div>
+
+        <div tw="flex items-start">
+          <ProfileBar userData={requesterUserData}/>
         </div>
 
         <div tw="flex flex-row justify-around items-center pt-3">
+            <StatsCircle 
+              value={masksUserInfo.masks.toString()} 
+              label="Balance" 
+              textSize={{ valueSize: "5xl", labelSize: "4xl" }}
+              circleSize="75"
+            />
 
-            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full`}>
-                <div tw={`flex text-[${colors.textColor}] text-center text-5xl p-2`}>{masksUserInfo.masks.toString()}</div>
-                <div tw={`text-[${colors.textColor}] text-center text-4xl pt-2`}>Balance</div>
-            </div>
+            <StatsCircle 
+              value={(
+                <>
+                  <span>{masksUserInfo.remainingAllowance.toString()}</span>
+                  <span tw={`text-[${colors.accentColor}]`}> / </span>
+                  <span>{masksUserInfo.weeklyAllowance.toString()}</span>
+                </>
+              )} 
+              label="Allowance" 
+              textSize={{ valueSize: "5xl", labelSize: "4xl" }}
+              circleSize="85"
+            />
 
-            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-85 min-h-85 rounded-full`}>
-                <div tw={`flex text-[${colors.textColor}] text-center text-5xl p-2`}>
-                    <span>{masksUserInfo.remainingAllowance.toString()}</span>
-                    <span tw={`text-[${colors.accentColor}]`}> / </span>
-                    <span>{masksUserInfo.weeklyAllowance.toString()}</span>
-                </div>
-                <div tw={`text-[${colors.textColor}] text-center text-4xl pt-2`}>Allowance</div>
-            </div>
-
-            <div tw={`flex flex-col items-center justify-center bg-[${colors.primaryColor}] min-w-75 min-h-75 rounded-full`}>
-                <div tw={`flex flex-row text-[${colors.textColor}] text-center text-5xl p-2`}>
-                    <span tw={`text-[${colors.accentColor}]`}>#</span>
-                    <span>{masksUserRank.rank.toString()}</span>
-                </div>
-                <div tw={`text-[${colors.textColor}] text-center text-4xl pt-2`}>Rank</div>
-            </div>
+            <StatsCircle 
+              value={
+                <>
+                  <span tw={`text-[${colors.accentColor}]`}>#</span>
+                  <span>{masksUserRank.rank.toString()}</span>
+                </>
+              } 
+              label="Rank" 
+              textSize={{ valueSize: "5xl", labelSize: "4xl" }}
+              circleSize="75"
+            />
         </div>
-        
-        <div id="badges" tw="flex flex-row items-center justify-center mt-4">
-          <div tw={`flex bg-[${colors.secondaryColor}] p-4 rounded-full`}>
-            <div tw={`flex text-[${colors.textColor}] text-5xl bg-${masksUserInfo.nftOneBonus > 0 ? "green" : "red"}-500 p-2 m-2 rounded-full`}>
-              <LiaPiggyBankSolid/>
-            </div>
-            <div tw={`flex text-[${colors.textColor}] text-5xl bg-${masksUserInfo.tippingAllowed ? "green" : "red"}-500 p-2 m-2 rounded-full`}>
-              <CiLock/>
-            </div>
-            <div tw={`flex text-[${colors.textColor}] text-5xl bg-${masksUserInfo.nftTwoCashback > 0 ? "green" : "red"}-500 p-2 m-2 rounded-full`}>
-              <PiDeviceRotate/>
-            </div>
-          </div>
+
+        <div tw="flex flex-row items-center justify-center mt-4">
+          <BadgeBar
+              badges={[
+                  { content: LiaPiggyBankSolid, isActive: masksUserInfo.nftOneBonus > 0 },
+                  { content: CiLock, isActive: masksUserInfo.tippingAllowed },
+                  { content: PiDeviceRotate, isActive: masksUserInfo.nftTwoCashback > 0 },
+              ]}
+          />
         </div>
 
         {/* {requesterUserData?.displayName?.includes("🎭") ? "" : (

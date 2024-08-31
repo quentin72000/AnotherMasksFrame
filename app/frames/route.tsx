@@ -1,6 +1,6 @@
 import { Button } from "frames.js/next";
 import { frames, generateErrorFrame, generateFrame } from "./frames";
-import { appURL } from "../utils";
+import { appURL } from "../utils/url";
 import { fetchMasksUserInfos } from "../utils/masksUserRequests";
 import colors from "../utils/colors"
 
